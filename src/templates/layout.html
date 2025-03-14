@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>{% block title %}Hackademy{% endblock %}</title>
+  <style>
+    /* Apple-like slate design plus minimal form styling */
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen;
+      background-color: #2F2F2F; /* Slate background */
+      color: #F7F7F7; /* Light text on dark background */
+      padding: 0 2rem;
+    }
+
+    header {
+      background-color: #333333;
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    nav {
+      display: flex;
+      gap: 1rem;
+    }
+
+    nav a {
+      color: #F7F7F7;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    /* New: Search form styling */
+    form.search-form {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    form.search-form input[type="text"] {
+      padding: 0.3rem;
+      border-radius: 4px;
+      border: 1px solid #999;
+    }
+
+    form.search-form button {
+      background-color: #007AFF; /* Apple-like accent */
+      border: none;
+      padding: 0.4rem 0.8rem;
+      border-radius: 4px;
+      color: #FFF;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .question-block {
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      background-color: #3A3A3A;
+      border-radius: 8px;
+    }
+
+    button {
+      background-color: #007AFF; /* Apple-like accent */
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 4px;
+      color: #FFF;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/categories">Categories</a>
+    </nav>
+    <!-- Search form here -->
+    <form class="search-form" action="/search" method="get">
+      <input type="text" name="q" placeholder="Search topics..." />
+      <button type="submit">Search</button>
+    </form>
+  </header>
+  <main>
+    {% block body %}{% endblock %}
+  </main>
+</body>
+</html>

@@ -1,0 +1,22 @@
+version: "3.8"
+services:
+  surrealdb:
+    image: surrealdb/surrealdb:latest
+    command: start --user root --pass root memory
+    ports:
+      - "8000:8000"
+
+  hackademy:
+    build: .
+    depends_on:
+      - surrealdb
+    environment:
+      - SURREALDB_URI=surrealdb:8000
+      - SURREALDB_USER=root
+      - SURREALDB_PASS=root
+      - SURREALDB_NS=hackademy_ns
+      - SURREALDB_DB=hackademy_db
+      - HACKADEMY_ADDR=0.0.0.0:3000
+      - SESSION_SECRET=some_secure_secret
+    ports:
+      - "3000:3000"

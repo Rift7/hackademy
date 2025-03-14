@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+{% block body %}
+  <h1>Search Results for: "{{ query }}"</h1>
+
+  {% if categories | length == 0 and subcategories | length == 0 and questions | length == 0 %}
+    <p>No results found.</p>
+  {% else %}
+    {% if categories | length > 0 %}
+      <h2>Matching Categories</h2>
+      <ul>
+        {% for cat in categories %}
+          <li>
+            <strong>{{ cat.title }}</strong> 
+            - <a href="/category/{{ cat.id }}">View Subcategories</a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    {% if subcategories | length > 0 %}
+      <h2>Matching Subcategories</h2>
+      <ul>
+        {% for subcat in subcategories %}
+          <li>
+            <strong>{{ subcat.title }}</strong><br/>
+            {{ subcat.description }}<br/>
+            <em>Parent Category:</em> {{ subcat.parent_category_title }}<br/>
+            <a href="/quiz?category_id={{ subcat.parent_category_id }}&subcategory_id={{ subcat.id }}">
+              <button>Take Quiz</button>
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    {% if questions | length > 0 %}
+      <h2>Matching Questions</h2>
+      <ul>
+        {% for q in questions %}
+          <li>
+            <strong>{{ q.question_text }}</strong><br/>
+            (Category ID: {{ q.category_id }}, Subcategory: {{ q.subcategory_id }})
+            <br/>
+            <a href="/quiz?category_id={{ q.category_id }}&subcategory_id={{ q.subcategory_id }}">
+              <button>Go to Quiz</button>
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endif %}
+
+  <p><a href="/">Back to Home</a></p>
+{% endblock %}

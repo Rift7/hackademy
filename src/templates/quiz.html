@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block body %}
+  <h1>{{ title }}</h1>
+  <form action="/quiz/submit" method="post">
+    {% for q in questions %}
+      <div class="question-block">
+        <p>{{ q.question_text }}</p>
+        <ul>
+          {% for (idx, option) in q.options|enumerate() %}
+            <li>
+              <label>
+                <input
+                  type="radio"
+                  name="question_{{ q.id }}"
+                  value="{{ idx }}"
+                />
+                {{ option }}
+              </label>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endfor %}
+    <button type="submit">Submit</button>
+  </form>
+{% endblock %}

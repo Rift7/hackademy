@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block body %}
+  <h1>{{ category_title }} Subcategories</h1>
+  <ul>
+    {% for subcat in subcategories %}
+      <li>
+        <h3>{{ subcat.title }}</h3>
+        <p>{{ subcat.description }}</p>
+        <!-- Link to quiz route by passing category_id and subcategory_id -->
+        <a href="/quiz?category_id={{ cat_id }}&subcategory_id={{ subcat.id }}">
+          <button>Take Quiz</button>
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}
